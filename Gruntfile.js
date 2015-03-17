@@ -1030,6 +1030,22 @@ module.exports = function( grunt ) {
 			testsOutput: [ "_tests" ],
 			"googleCDN": [ "<%= dirs.cdn.google %>" ],
 			"jqueryCDN": [ "<%= dirs.cdn.jquery %>" ]
+		},
+
+	    intern: {
+			options: {
+				runType: 'runner'
+			},
+			demo: {
+				options: {
+					config: 'tests/intern-local'
+				}
+			},
+			ci: {
+				options: {
+					config: 'tests/intern'
+				}
+			}
 		}
 	});
 
@@ -1044,6 +1060,12 @@ module.exports = function( grunt ) {
 	});
 
 	grunt.registerTask( "lint", [ "jshint" ] );
+
+
+	grunt.registarTask( "combine:unit", function () {
+		require('fs').writeFileSync('tests/unit/all.js', 'define(' + JSON.stringify(require('glob').sync('tests/unit/**/!(all).js').map(function (filename) { return filename.replace(/\.js$/, ''); })) + ');\n', { encoding: 'utf-8' });
+
+	});
 
 	grunt.registerTask( "changelog", ["changelog:create"] );
 
