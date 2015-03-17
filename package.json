@@ -45,6 +45,7 @@
 		"grunt-php": "0.3.2",
 		"grunt-qunit-istanbul": "0.3.0",
 		"grunt-qunit-junit": "0.1.0-alpha2",
+		"intern": "2.2.2",
 		"jsdom": "0.8.3",
 		"load-grunt-tasks": "0.3.0",
 		"optimist": "0.6.0",
