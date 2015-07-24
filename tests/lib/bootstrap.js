@@ -15,11 +15,21 @@
 	} );
 
 	function requireModules( dependencies, callback, modules ) {
+		if ( dependencies.length == 1 ) {
+
+			$( document ).ready( function() {
+				var $fixture = $( '#qunit-fixture' );
+				if ( $fixture.length ) {
+					QUnit.config.fixture = $fixture.html();
+				}
+				QUnit.start();
+			} );
+		}
+
 		if ( !dependencies.length ) {
 			if ( callback ) {
 				callback.apply( null, modules );
 			}
-			return;
 		}
 
 		if ( !modules ) {
@@ -42,6 +52,8 @@
 
 	// Load test modules based on data attributes
 	(function() {
+		QUnit.config.autostart = false;
+
 		var scripts = document.getElementsByTagName( "script" );
 		var script = scripts[ scripts.length - 1 ];
 
@@ -56,21 +68,25 @@
 		var init = !!script.getAttribute( "data-init" );
 		var noBackCompat = !!script.getAttribute( "data-no-backcompat" );
 		var baseUrl = script.getAttribute( "data-base-url" );
+		var main = script.getAttribute( "data-main" );
 
 		if ( init ) {
 			deps = deps.concat( [ "init" ] );
+
+			if ( noBackCompat ) {
+				deps = deps.concat( [ "jquery-no-backcompat" ] );
+			} else {
+				deps = deps.concat( [ "jquery-set-ns", "widget/widget.backcompat" ] );
+			}
 		}
 
-		if ( noBackCompat ) {
-			deps = deps.concat( [ "jquery-no-backcompat" ] );
-		} else {
-			deps = deps.concat( [ "jquery-set-ns" ] );
+		if ( main ) {
+			deps = deps.concat( main );
 		}
 
 		require( {
 			baseUrl: baseUrl || "../../../js"
 		} );
-
 
 		requireTests( deps )
 
