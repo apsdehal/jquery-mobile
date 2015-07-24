@@ -1,7 +1,8 @@
 /*
  * mobile Fixed Toolbar unit tests
  */
-( function( $ ) {
+define( [ "jquery" ], function( $ ) {
+
 module( 'jquery.mobile.toolbar.js' );
 
 test( "Fixed Header Structural Classes are applied correctly", function() {
@@ -65,4 +66,5 @@ test( "Destroy works properly with external toolbars", function() {
 	ok( $.testHelper.domEqual( destroyed, unEnhanced ),
 		"unEnhanced equals destroyed" );
 } );
-} )( jQuery );
+
+} );
