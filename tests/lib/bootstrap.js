@@ -28,6 +28,69 @@
 		return $;
 	} );
 
+	var widgets = [
+		// Main Widgets
+		"accordion",
+        "listview",
+		"addFirstLastClasses",
+		"loader",
+		"collapsible",
+		"navbar",
+		"collapsibleSet",
+		"page.dialog",
+		"page",
+		"controlgroup",
+		"pagecontainer",
+		"dialog",
+		"panel",
+		"popup.arrow",
+		"enhancer",
+		"popup",
+		"enhancer.widgetCrawler",
+		"table.columntoggle",
+		"filterable",
+		"table",
+		"table.reflow",
+		"fixedToolbar",
+		"tabs.ajax",
+		"fixedToolbar.workarounds",
+		"toolbar",
+		"widget.backcompat",
+		"listview.autodividers",
+		"widget.theme",
+		"listview.hidedividers",
+		// Form Widgets
+		"forms/autogrow",
+		"forms/rangeslider",
+		"forms/reset",
+		"forms/button",
+		"forms/select.custom",
+		"forms/select",
+		"forms/checkboxradio",
+		"forms/clearButton",
+		"forms/slider",
+		"forms/slider.tooltip",
+		"forms/flipswitch",
+		"forms/textinput"
+	];
+
+	function getPath( dep ) {
+		for ( var i = 0; i < widgets.length; i++ ) {
+			if ( widgets[i] === dep ) {
+				return "widgets/" + dep;
+			}
+		}
+		return dep;
+	}
+
+	function fixPaths( deps ) {
+		for ( var i = 0; i < deps.length; i++ ) {
+			deps[ i ] = getPath( deps[ i ] );
+		}
+
+		return deps;
+	}
+
 	function requireModules( dependencies, callback, modules ) {
 		if ( dependencies.length == 1 ) {
 
@@ -71,10 +134,13 @@
 			deps = [];
 		}
 
+		deps = fixPaths( deps );
+
 		var init = !!script.getAttribute( "data-init" );
 		var noBackCompat = !!script.getAttribute( "data-no-backcompat" );
 		var baseUrl = script.getAttribute( "data-base-url" );
 		var main = script.getAttribute( "data-main" );
+		main = './' + main;
 
 		// Load these after backcompat resolution
 		deps = [
