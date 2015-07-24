@@ -1,5 +1,13 @@
 ( function() {
 
+	requirejs.config( {
+		"paths": {
+			"tests": "../tests",
+			"external": "../external",
+			"qunit": "../external/qunit/qunit"
+		}
+	} );
+
 	define( "jquery-no-backcompat", [ "jquery" ], function( $ ) {
 		$.mobileBackcompat = false;
 		return $;
@@ -43,16 +51,8 @@
 		} );
 	}
 
-	// Load a set of test file along with the required test infrastructure
-	function requireTests( dependencies ) {
-		requireModules( dependencies, function( QUnit ) {
-			// QUnit.start();
-		} );
-	}
-
 	// Load test modules based on data attributes
 	( function() {
-		QUnit.config.autostart = false;
 
 		var scripts = document.getElementsByTagName( "script" );
 		var script = scripts[ scripts.length - 1 ];
@@ -69,6 +69,13 @@
 		var noBackCompat = !!script.getAttribute( "data-no-backcompat" );
 		var baseUrl = script.getAttribute( "data-base-url" );
 		var main = script.getAttribute( "data-main" );
+
+		deps = [
+			"external/qunit/qunit",
+		].concat( deps ).concat( [
+			// "jquery.tag.inserter",
+			"tests/jquery.testHelper"
+		] );
 
 		if ( init ) {
 			deps = deps.concat( [ "init" ] );
@@ -88,7 +95,9 @@
 			baseUrl: baseUrl || "../../../js"
 		} );
 
-		requireTests( deps )
+		requireModules( deps, function( QUnit ) {
+			QUnit.config.autostart = false;
+		} );
 
 	} )();
 
