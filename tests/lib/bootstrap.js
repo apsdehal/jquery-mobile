@@ -51,7 +51,7 @@
 	}
 
 	// Load test modules based on data attributes
-	(function() {
+	( function() {
 		QUnit.config.autostart = false;
 
 		var scripts = document.getElementsByTagName( "script" );
@@ -76,7 +76,7 @@
 			if ( noBackCompat ) {
 				deps = deps.concat( [ "jquery-no-backcompat" ] );
 			} else {
-				deps = deps.concat( [ "jquery-set-ns", "widget/widget.backcompat" ] );
+				deps = deps.concat( [ "jquery-set-ns", "widgets/widget.backcompat" ] );
 			}
 		}
 
