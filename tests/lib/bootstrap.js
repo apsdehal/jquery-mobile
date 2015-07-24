@@ -4,7 +4,13 @@
 		"paths": {
 			"tests": "../tests",
 			"external": "../external",
-			"qunit": "../external/qunit/qunit"
+			"qunit": "../external/qunit/qunit",
+			"text": "../external/requirejs/plugins/text",
+			"json": "../external/requirejs/plugins/json",
+
+			"jquery": "../external/jquery/jquery",
+			"jquery-ui": "../external/jquery-ui",
+			"jquery-plugins": "../external/jquery/plugins"
 		}
 	} );
 
@@ -70,22 +76,27 @@
 		var baseUrl = script.getAttribute( "data-base-url" );
 		var main = script.getAttribute( "data-main" );
 
+		// Load these after backcompat resolution
 		deps = [
-			"external/qunit/qunit",
-		].concat( deps ).concat( [
-			// "jquery.tag.inserter",
+			"jquery.tag.inserter",
 			"tests/jquery.testHelper"
-		] );
+		].concat( deps );
 
 		if ( init ) {
 			deps = deps.concat( [ "init" ] );
 
 			if ( noBackCompat ) {
-				deps = deps.concat( [ "jquery-no-backcompat" ] );
+				deps = [ "jquery-no-backcompat" ].concat( deps );
 			} else {
-				deps = deps.concat( [ "jquery-set-ns", "widgets/widget.backcompat" ] );
+				deps =  [
+					"jquery-set-ns",
+					"widgets/widget.backcompat"
+				].concat( deps );
 			}
 		}
+
+		// Load QUnit first among all of them
+		deps = [ "qunit" ].concat( deps );
 
 		if ( main ) {
 			deps = deps.concat( main );
