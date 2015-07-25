@@ -159,6 +159,8 @@
 					"widgets/widget.backcompat"
 				].concat( deps );
 			}
+		} else {
+			deps = [ "jquery" ].concat( deps );
 		}
 
 		// Load QUnit first among all of them
