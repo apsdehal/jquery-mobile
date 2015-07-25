@@ -1,10 +1,11 @@
 ( function() {
 
 	requirejs.config( {
-		"paths": {
+		paths: {
 			"tests": "../tests",
 			"external": "../external",
 			"qunit": "../external/qunit/qunit",
+			"qunit": "../external/qunit-assert-classes/qunit-assert-classes",
 			"text": "../external/requirejs/plugins/text",
 			"json": "../external/requirejs/plugins/json",
 
@@ -37,6 +38,7 @@
 		"controlgroup",
 		"dialog",
 		"enhancer",
+		"enhancer.backcompat",
 		"enhancer.widgetCrawler",
 		"filterable",
 		"fixedToolbar",
