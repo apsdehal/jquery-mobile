@@ -5,13 +5,13 @@
 			"tests": "../tests",
 			"external": "../external",
 			"qunit": "../external/qunit/qunit",
-			"qunit": "../external/qunit-assert-classes/qunit-assert-classes",
 			"text": "../external/requirejs/plugins/text",
 			"json": "../external/requirejs/plugins/json",
 
 			"jquery": "../external/jquery/jquery",
 			"jquery-ui": "../external/jquery-ui",
-			"jquery-plugins": "../external/jquery/plugins"
+			"jquery-plugins": "../external/jquery/plugins",
+			"qunit-assert-classes": "../external/qunit-assert-classes/qunit-assert-classes"
 		}
 	} );
 
@@ -43,7 +43,7 @@
 		"filterable",
 		"fixedToolbar",
 		"fixedToolbar.workarounds",
-        "listview",
+		"listview",
 		"listview.autodividers",
 		"listview.hidedividers",
 		"loader",
@@ -76,10 +76,24 @@
 		"forms/textinput"
 	];
 
+	var events = [
+		"navigate",
+		"orientationchange",
+		"scroll",
+		"throttledresize",
+		"touch"
+	];
+
 	function getPath( dep ) {
 		for ( var i = 0; i < widgets.length; i++ ) {
 			if ( widgets[i] === dep ) {
 				return "widgets/" + dep;
+			}
+		}
+
+		for ( var i = 0; i < events.length; i++ ) {
+			if ( events[i] === dep ) {
+				return "events/" + dep;
 			}
 		}
 		return dep;
@@ -134,6 +148,13 @@
 			deps = deps.replace( /^\s+|\s+$/g, "" ).split( /\s+/ );
 		} else {
 			deps = [];
+		}
+
+		var localDep = script.getAttribute( "data-local-dep" );
+
+		if ( localDep ) {
+			localDep = "./" + localDep + ".js";
+			deps = [ localDep ].concat( deps );
 		}
 
 		deps = fixPaths( deps );
