@@ -1,7 +1,7 @@
 /*
  * mobile slider unit tests
  */
-( function( QUnit, $ ) {
+define( [ "jquery" ], function( $ ) {
 
 	QUnit.module( "jquery.mobile.rangeslider.js core" );
 
@@ -152,4 +152,4 @@
 		handleFirst.trigger( "keydown" );
 	} );
 
-} )( QUnit, jQuery );
+} );
