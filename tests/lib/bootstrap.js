@@ -68,10 +68,12 @@
 		"forms/clearButton",
 		"forms/flipswitch",
 		"forms/rangeslider",
+		"forms/rangeslider.backcompat",
 		"forms/reset",
 		"forms/select",
 		"forms/select.custom",
 		"forms/slider",
+		"forms/slider.backcompat",
 		"forms/slider.tooltip",
 		"forms/textinput",
 		"forms/textinput.backcompat"
