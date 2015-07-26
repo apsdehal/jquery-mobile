@@ -1,7 +1,8 @@
 /*
  * mobile slider unit tests
  */
-( function( $ ) {
+define( [ "jquery" ], function( $ ) {
+
 
 module( "jquery.mobile.slider.js backcompat" );
 
@@ -19,7 +20,7 @@ test( "data-highlight works properly", function() {
 
 test( "backcompat tests", function(assert) {
 	assert.hasClasses( $( "#mini-option-test" ).siblings( ".ui-slider-track" ), "ui-mini" );
-	assert.lacksClasses( $( "#corners-option-test" ).siblings( ".ui-slider-track" ), 
+	assert.lacksClasses( $( "#corners-option-test" ).siblings( ".ui-slider-track" ),
 		"ui-corner-all" );
 } );
 
@@ -28,4 +29,4 @@ test( "slider elements in the keepNative set shouldn't be enhanced", function() 
 	deepEqual( $( "input.should-be-native" ).siblings( ".ui-slider-track" ).length, 0 );
 } );
 
-} )( jQuery );
+} );

@@ -2,7 +2,7 @@
  * mobile slider unit tests
  */
 
-( function( $ ) {
+define( [ "jquery" ], function( $ ) {
 var onChangeCnt = 0;
 window.onChangeCounter = function() {
 	onChangeCnt++;
@@ -289,4 +289,4 @@ if ( $.testHelper.versionTest( $.fn.jquery, function( l, r ) {
 		equal( getDocumentEventsLength( "vmousemove" ), ( vmousemoveLength - 1 ), 'vmousemove event was removed' );
 	} );
 }
-} )( jQuery );
+} );
