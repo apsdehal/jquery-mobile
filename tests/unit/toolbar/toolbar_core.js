@@ -1,7 +1,8 @@
 /*
  * mobile Fixed Toolbar unit tests
  */
-( function( $ ) {
+define( [ "jquery" ], function( $ ) {
+
 module( "toolbar" );
 
 test( "header classes and roles assigned correctly", function() {
@@ -87,4 +88,4 @@ test( "destroy preserves original structure", function() {
 	ok( $.testHelper.domEqual( headerClone, unEnhancedHeader ), "headers match after destroy" );
 } );
 
-} )( jQuery );
+} );
