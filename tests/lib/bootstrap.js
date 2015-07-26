@@ -166,7 +166,6 @@
 		var noBackCompat = !!script.getAttribute( "data-no-backcompat" );
 		var baseUrl = script.getAttribute( "data-base-url" );
 		var main = script.getAttribute( "data-main" );
-		main = './' + main + '.js';
 
 		// Load these after backcompat resolution
 		deps = [
@@ -193,6 +192,7 @@
 		deps = [ "qunit" ].concat( deps );
 
 		if ( main ) {
+			main = './' + main + '.js';
 			deps = deps.concat( main );
 		}
 
