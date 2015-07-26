@@ -73,7 +73,8 @@
 		"forms/select.custom",
 		"forms/slider",
 		"forms/slider.tooltip",
-		"forms/textinput"
+		"forms/textinput",
+		"forms/textinput.backcompat"
 	];
 
 	var events = [
@@ -163,7 +164,7 @@
 		var noBackCompat = !!script.getAttribute( "data-no-backcompat" );
 		var baseUrl = script.getAttribute( "data-base-url" );
 		var main = script.getAttribute( "data-main" );
-		main = './' + main;
+		main = './' + main + '.js';
 
 		// Load these after backcompat resolution
 		deps = [
