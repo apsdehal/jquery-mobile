@@ -24,7 +24,7 @@ require( [
 			};
 		},
 		reloadCoreNSandInit = function() {
-			$.testHelper.reloadLib( "jquery.setNameSpace.js" );
+			$.testHelper.reloadLib( "../../jquery.setNameSpace.js" );
 			return $.when( $.testHelper.reloadModule( coreLib ), $.testHelper.reloadModule( libName ) )
 		};
 
