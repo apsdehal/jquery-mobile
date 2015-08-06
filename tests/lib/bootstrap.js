@@ -153,11 +153,10 @@
 			deps = [];
 		}
 
-		var localDep = script.getAttribute( "data-local-dep" );
+		var full = script.getAttribute( "data-full" );
 
-		if ( localDep ) {
-			localDep = "./" + localDep + ".js";
-			deps = [ localDep ].concat( deps );
+		if ( full ) {
+			deps = deps.concat( "jquery.mobile" );
 		}
 
 		deps = fixPaths( deps );
