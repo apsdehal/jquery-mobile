@@ -110,7 +110,7 @@
 		return deps;
 	}
 
-	function requireModules( dependencies, callback, modules ) {
+	function requireModules( dependencies, callback, noAutoStart, modules ) {
 		if ( dependencies.length == 1 ) {
 
 			$( document ).ready( function() {
@@ -118,7 +118,10 @@
 				if ( $fixture.length ) {
 					QUnit.config.fixture = $fixture.html();
 				}
-				QUnit.start();
+
+				if ( !noAutoStart ) {
+					QUnit.start();
+				}
 			} );
 		}
 
@@ -135,7 +138,7 @@
 		var dependency = dependencies.shift();
 		require( [ dependency ], function( module ) {
 			modules.push( module );
-			requireModules( dependencies, callback, modules );
+			requireModules( dependencies, callback, noAutoStart, modules );
 		} );
 	}
 
@@ -153,7 +156,7 @@
 			deps = [];
 		}
 
-		var full = script.getAttribute( "data-full" );
+		var full = !!script.getAttribute( "data-full" );
 
 		if ( full ) {
 			deps = deps.concat( "jquery.mobile" );
@@ -162,6 +165,7 @@
 		deps = fixPaths( deps );
 
 		var init = !!script.getAttribute( "data-init" );
+		var noAutoStart = !!script.getAttribute( "data-no-autostart" );
 		var noBackCompat = !!script.getAttribute( "data-no-backcompat" );
 		var baseUrl = script.getAttribute( "data-base-url" );
 		var modules = script.getAttribute( "data-modules" );
@@ -211,7 +215,7 @@
 
 		requireModules( deps, function( QUnit ) {
 			QUnit.config.autostart = false;
-		} );
+		}, noAutoStart );
 
 	} )();
 
