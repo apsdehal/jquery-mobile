@@ -1,7 +1,7 @@
 /*
  * mobile init tests
  */
-( function( QUnit, $ ) {
+define( [ "jquery", "qunit" ], function( $, QUnit ) {
 
 setTimeout( function() {
 	QUnit.start();
@@ -183,4 +183,4 @@ QUnit.test( "test the loading config object precedence", function( assert ) {
 		"has text fozzle in loading config object" );
 } );
 
-} )( QUnit, jQuery );
+} );
