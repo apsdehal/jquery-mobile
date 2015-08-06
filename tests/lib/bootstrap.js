@@ -165,7 +165,20 @@
 		var init = !!script.getAttribute( "data-init" );
 		var noBackCompat = !!script.getAttribute( "data-no-backcompat" );
 		var baseUrl = script.getAttribute( "data-base-url" );
-		var main = script.getAttribute( "data-main" );
+		var modules = script.getAttribute( "data-modules" );
+
+		// Format modules attribute
+		if ( modules ) {
+			modules = modules
+					  .replace( /^\s+|\s+$/g, "" )
+					  .split( /\s+/ )
+					  .map( function( module ) {
+					  	// Change to make sure it is loaded from the local folder
+					  	return "./" + module + ".js";
+					  });
+		} else {
+			modules = [];
+		}
 
 		// Load these after backcompat resolution
 		deps = [
@@ -191,10 +204,7 @@
 		// Load QUnit first among all of them
 		deps = [ "qunit" ].concat( deps );
 
-		if ( main ) {
-			main = './' + main + '.js';
-			deps = deps.concat( main );
-		}
+		deps = deps.concat( modules );
 
 		require( {
 			baseUrl: baseUrl || "../../../js"
