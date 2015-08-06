@@ -1,7 +1,7 @@
 /*
  * mobile page unit tests
  */
-define( [ "jquery", "./page.setup.js", "init" ], function( $, container ) {
+define( [ "jquery", "./page.setup.js" ], function( $, container ) {
 
 var libName = 'jquery.mobile.page',
 	themedefault = $.mobile.page.prototype.options.theme;
