@@ -5,23 +5,25 @@ module.exports = function( grunt ) {
 return {
 	options: {
 		timeout: 60000,
-		"--web-security": "no",
-		coverage: {
-			baseUrl: ".",
-			src: [
-				"js/**/*.js",
-				"!js/jquery.tag.inserter.js",
-				"!js/requirejs.config.js"
-			],
-			instrumentedFiles: "temp/",
-			htmlReport: "_tests/reports/coverage",
-			lcovReport: "_tests/reports/lcov",
-			linesThresholdPct: 0
-		}
+		"--web-security": "no"
+
+		// coverage: {
+		// 	baseUrl: ".",
+		// 	src: [
+		// 		"js/**/*.js",
+		// 		"!js/jquery.tag.inserter.js",
+		// 		"!js/requirejs.config.js"
+		// 	],
+		// 	instrumentedFiles: "temp/",
+		// 	htmlReport: "_tests/reports/coverage",
+		// 	lcovReport: "_tests/reports/lcov",
+		// 	linesThresholdPct: 0
+		// }
 	},
 
 	http: {
 		options: {
+			inject: false,
 			urls: ( function() {
 				var allSuites, patterns, paths,
 					testDirs = [ "unit", "integration", "css" ],
