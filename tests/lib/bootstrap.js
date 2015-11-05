@@ -37,6 +37,12 @@
 		return $;
 	} );
 
+	define( "jquery-set-push-state", [ "jquery" ], function( $ ) {
+		$( document ).bind( 'mobileinit', function() {
+			$.testHelper.setPushState();
+		} );
+	} )
+
 	var widgets = [
 		// Main Widgets
 		"accordion",
@@ -169,7 +175,12 @@
 		var noBackCompat = !!script.getAttribute( "data-no-backcompat" );
 		var noAutoStart = !!script.getAttribute( "data-no-autostart" );
 		var initAfterModules = !!script.getAttribute( "data-init-after-modules" );
+		var setPushState = !!script.getAttribute( "data-set-push-state" );
 		var modules = script.getAttribute( "data-modules" );
+
+		if ( setPushState ) {
+			deps.concat( [ "jquery-set-push-state" ] );
+		}
 
 		if ( full ) {
 			deps = deps.concat( "jquery.mobile" );
